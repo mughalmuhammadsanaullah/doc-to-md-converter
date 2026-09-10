@@ -1,5 +1,11 @@
 from pathlib import Path
 from markitdown import MarkItDown, MarkItDownException
+import tiktoken
+
+encoding = tiktoken.get_encoding("cl100k_base")
+
+def count_tokens(text):
+    return len(encoding.encode(text))
 
 md = MarkItDown()
 SUPPORTED_EXTENSIONS = {".docx", ".pdf", ".xlsx"}
@@ -19,3 +25,8 @@ def convert_to_markdown(file_path):
     except MarkItDownException as e:
         print(f"Error: couldn't convert '{file_path}' — it may be corrupted or unsupported.\nDetails: {e}")
         return None
+
+markdown_text = convert_to_markdown("sample.docx")
+if markdown_text:
+    print(markdown_text)
+    print(f"\nToken count: {count_tokens(markdown_text)}")

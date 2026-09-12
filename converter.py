@@ -32,15 +32,16 @@ def convert_to_markdown(file_path):
         print(f"Error: couldn't convert '{file_path}' — it may be corrupted or unsupported.\nDetails: {e}")
         return None
 
-markdown_text = convert_to_markdown("sample.docx")
-if markdown_text:
-    raw_text = extract_raw_text("sample.docx")
-    raw_tokens = count_tokens(raw_text)
-    markdown_tokens = count_tokens(markdown_text)
+if __name__ == "__main__":
+    markdown_text = convert_to_markdown("sample.docx")
+    if markdown_text:
+        raw_text = extract_raw_text("sample.docx")
+        raw_tokens = count_tokens(raw_text)
+        markdown_tokens = count_tokens(markdown_text)
 
-    print(markdown_text)
-    print(f"\nRaw text tokens: {raw_tokens}")
-    print(f"Markdown tokens: {markdown_tokens}")
-    if raw_tokens > 0:
-        savings = (raw_tokens - markdown_tokens) / raw_tokens * 100
-        print(f"Savings: {savings:.1f}%")
+        print(markdown_text)
+        print(f"\nRaw text tokens: {raw_tokens}")
+        print(f"Markdown tokens: {markdown_tokens}")
+        if raw_tokens > 0:
+            savings = (raw_tokens - markdown_tokens) / raw_tokens * 100
+            print(f"Savings: {savings:.1f}%")
